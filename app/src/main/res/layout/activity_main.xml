@@ -30,10 +30,14 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.busy.looping.like_view_library.LikeView
+        app:scale_down="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
+        app:duration="400"
+        app:repeatCount="5"
+        app:interpolator="FastOutLinearIn"
         android:layout_height="wrap_content"
         app:tint="#E91E63"/>
 

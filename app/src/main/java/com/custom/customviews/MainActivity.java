@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.busy.looping.like_view_library.LikeView;
 import com.custom.customviews.view.CustomView;
 
 public class MainActivity extends AppCompatActivity {

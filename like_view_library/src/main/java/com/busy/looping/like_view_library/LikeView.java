@@ -6,21 +6,35 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
 public class LikeView extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener {
     private OnLikeChangeListener onLikeChangeListener;
     private Context context;
-    private float scaleValue;
+    private float scaleValue, repeatCount;
     private boolean isLiked, animateLikeToUnlike, animateUnlikeToLike;
     private ObjectAnimator objectAnimator;
     private PropertyValuesHolder pvhScaleUpX;
     private PropertyValuesHolder pvhScaleUpY;
-    private int likes;
+    private int likes, duration, interpolatorIndex;
 
 
     public LikeView(@NonNull Context context) {
@@ -49,12 +63,57 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
         animateUnlikeToLike = array.getBoolean(R.styleable.LikeView_anim_unlike_to_like, true);
         scaleValue = array.getFloat(R.styleable.LikeView_scale_down, 0.8f);
         likes = array.getInteger(R.styleable.LikeView_likes, 0);
+        duration = array.getInteger(R.styleable.LikeView_duration, 300);
+        TypedValue typedValue = new TypedValue();
+        array.getValue(R.styleable.LikeView_interpolator, typedValue);
+        interpolatorIndex = typedValue.data;
+        repeatCount = array.getFloat(R.styleable.LikeView_repeatCount, 1);
         array.recycle();
         if (scaleValue > 1f) scaleValue = 1f;
         if (scaleValue < 0f) scaleValue = 0f;
-        pvhScaleUpX = PropertyValuesHolder.ofFloat(SCALE_X, scaleValue, 1f);
-        pvhScaleUpY = PropertyValuesHolder.ofFloat(SCALE_Y, scaleValue, 1f);
+        pvhScaleUpX = PropertyValuesHolder.ofFloat(SCALE_X, scaleValue, 1.1f, 1f);
+        pvhScaleUpY = PropertyValuesHolder.ofFloat(SCALE_Y, scaleValue, 1.1f, 1f);
         objectAnimator = ObjectAnimator.ofPropertyValuesHolder(this, pvhScaleUpX, pvhScaleUpY);
+        switch (interpolatorIndex) {
+            case 0:
+                objectAnimator.setInterpolator(new AnticipateOvershootInterpolator());
+                break;
+            case 1:
+                objectAnimator.setInterpolator(new AnticipateInterpolator());
+                break;
+            case 2:
+                objectAnimator.setInterpolator(new OvershootInterpolator());
+                break;
+            case 3:
+                objectAnimator.setInterpolator(new AccelerateInterpolator());
+                break;
+            case 4:
+                objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+                break;
+            case 5:
+                objectAnimator.setInterpolator(new BounceInterpolator());
+                break;
+            case 6:
+                objectAnimator.setInterpolator(new CycleInterpolator(repeatCount));
+                break;
+            case 7:
+                objectAnimator.setInterpolator(new DecelerateInterpolator());
+                break;
+            case 8:
+                objectAnimator.setInterpolator(new LinearInterpolator());
+                break;
+            case 9:
+                objectAnimator.setInterpolator(new FastOutLinearInInterpolator());
+                break;
+            case 10:
+                objectAnimator.setInterpolator(new FastOutSlowInInterpolator());
+                break;
+            case 11:
+                objectAnimator.setInterpolator(new LinearOutSlowInInterpolator());
+                break;
+        }
+
+        objectAnimator.setDuration(duration);
     }
 
     @Override
@@ -75,7 +134,7 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
     public void onClick(View view) {
         objectAnimator.cancel();
         if (isLiked) {
-            likes --;
+            likes--;
             setImageResource(R.drawable.ic_heart_outline);
             if (animateLikeToUnlike)
                 objectAnimator.start();

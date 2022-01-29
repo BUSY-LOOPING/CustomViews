@@ -6,5 +6,21 @@
         <!--        scale_down value between 0.0f - 1.0f-->
         <attr name="scale_down" format="float" />
         <attr name="likes" format="integer"/>
+        <attr name="duration" format="integer"/>
+        <attr name="repeatCount" format="float"/>
+        <attr name="interpolator" >
+            <enum name="AnticipateOvershoot" value="0"/>
+            <enum name="Anticipate" value="1"/>
+            <enum name="Overshoot" value="2"/>
+            <enum name="Accelerate" value="3"/>
+            <enum name="AccelerateDecelerate" value="4"/>
+            <enum name="Bounce" value="5"/>
+            <enum name="Cycle" value="6"/>
+            <enum name="Decelerate" value="7"/>
+            <enum name="Linear" value="8"/>
+            <enum name="FastOutLinearIn" value="9"/>
+            <enum name="FastOutSlowIn" value="10"/>
+            <enum name="LinearOutSlowIn" value="11"/>
+        </attr>
     </declare-styleable>
 </resources>
