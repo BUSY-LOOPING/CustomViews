@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LikeView">
+        <attr name="anim_like_to_unlike" format="boolean" />
+        <attr name="anim_unlike_to_like" format="boolean" />
+        <!--        scale_down value between 0.0f - 1.0f-->
+        <attr name="scale_down" format="float" />
+        <attr name="likes" format="integer"/>
+    </declare-styleable>
+</resources>

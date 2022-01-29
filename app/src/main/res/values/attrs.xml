@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircularFlippableView">
+        <attr name="flippedSrc" format="reference" />
+        <attr name="flippedText" format="string" />
+        <attr name="radius" format="dimension"/>
+        <attr name="android:src" format="reference"/>
+    </declare-styleable>
+</resources>
