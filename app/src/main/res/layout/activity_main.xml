@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         app:duration="400"
         app:repeatCount="5"
-        app:interpolator="FastOutLinearIn"
+        app:interpolator="Anticipate"
         android:layout_height="wrap_content"
         app:tint="#E91E63"/>
 
