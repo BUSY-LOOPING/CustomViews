@@ -2,6 +2,7 @@ package com.busy.looping.like_view_library;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -55,6 +56,7 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
 
     private void init(Context context, @Nullable AttributeSet attrs) {
         this.context = context;
+//        compositeListener.registerListener(this);
         setOnClickListener(this);
         isLiked = false;
         likes = 0;
@@ -162,9 +164,13 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
         this.likes = likes;
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        super.onTouchEvent(event);
-        return true;
+    public void setLiked (boolean isLiked) {
+        this.isLiked = isLiked;
+        if (isLiked) {
+            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_filled));
+        } else {
+            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_outline));
+        }
     }
+
 }
