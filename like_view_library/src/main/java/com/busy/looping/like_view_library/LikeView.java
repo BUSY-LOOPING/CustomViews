@@ -24,11 +24,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.ViewDataBinding;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
 public class LikeView extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener {
+    private ViewDataBinding likeViewDataBinding;
+
     private OnLikeChangeListener onLikeChangeListener;
     private Context context;
     private float scaleValue, repeatCount;
@@ -60,8 +64,14 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
         setOnClickListener(this);
         isLiked = false;
         likes = 0;
-        setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_outline));
+
         final TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.LikeView);
+        isLiked = array.getBoolean(R.styleable.LikeView_liked, false);
+        if (isLiked) {
+            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_filled));
+        } else {
+            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_outline));
+        }
         animateLikeToUnlike = array.getBoolean(R.styleable.LikeView_anim_like_to_unlike, true);
         animateUnlikeToLike = array.getBoolean(R.styleable.LikeView_anim_unlike_to_like, true);
         scaleValue = array.getFloat(R.styleable.LikeView_scale_down, 0.8f);
@@ -164,6 +174,7 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
         this.likes = likes;
     }
 
+    @BindingAdapter("liked")
     public void setLiked (boolean isLiked) {
         this.isLiked = isLiked;
         if (isLiked) {
@@ -173,4 +184,11 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
         }
     }
 
+    public ViewDataBinding getLikeViewDataBinding() {
+        return likeViewDataBinding;
+    }
+
+    public void setLikeViewDataBinding(ViewDataBinding likeViewDataBinding) {
+        this.likeViewDataBinding = likeViewDataBinding;
+    }
 }

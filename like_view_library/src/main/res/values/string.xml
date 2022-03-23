@@ -8,6 +8,7 @@
         <attr name="likes" format="integer"/>
         <attr name="duration" format="integer"/>
         <attr name="repeatCount" format="float"/>
+        <attr name="liked" format="boolean"/>
         <attr name="interpolator" >
             <enum name="AnticipateOvershoot" value="0"/>
             <enum name="Anticipate" value="1"/>
