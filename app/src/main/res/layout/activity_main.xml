@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<layout>
 
-    <com.custom.customviews.view.CustomView
+    <data>
+        <variable
+            name="isLiked"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/circularFlippableView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-    <com.custom.customviews.view.CircularFlippableView
-        android:id="@+id/circularFlippableView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:flippedSrc="@drawable/logo"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:radius="100dp"
-        tools:ignore="SpeakableTextPresentCheck" />
+        <com.custom.customviews.view.CustomView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/circularFlippableView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.112" />
 
-    <com.busy.looping.like_view_library.LikeView
-        app:scale_down="0.6"
-        android:id="@+id/like"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="wrap_content"
-        app:duration="400"
-        app:repeatCount="5"
-        app:interpolator="Anticipate"
-        android:layout_height="wrap_content"
-        app:tint="#E91E63"/>
+        <com.custom.customviews.view.CircularFlippableView
+            android:id="@+id/circularFlippableView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            app:flippedSrc="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="100dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.busy.looping.like_view_library.LikeView
+            app:liked="@{isLiked}"
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:duration="400"
+            app:interpolator="Anticipate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:repeatCount="5"
+            app:scale_down="0.6"
+            app:tint="#E91E63" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,24 +1,29 @@
 package com.custom.customviews;
 
+import android.os.Bundle;
+import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
-import com.busy.looping.like_view_library.LikeView;
-import com.custom.customviews.view.CustomView;
+import com.custom.customviews.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        LikeView likeView = findViewById(R.id.like);
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (binding != null)
+                    binding.setIsLiked(Boolean.TRUE);
+            }
+        }, 1500);
 
     }
 }

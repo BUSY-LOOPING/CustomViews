@@ -175,12 +175,12 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
     }
 
     @BindingAdapter("liked")
-    public void setLiked (boolean isLiked) {
-        this.isLiked = isLiked;
+    public static void setLiked (LikeView likeView, boolean isLiked) {
+        likeView.isLiked = isLiked;
         if (isLiked) {
-            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_filled));
+            likeView.setImageDrawable(ContextCompat.getDrawable(likeView.context, R.drawable.ic_heart_filled));
         } else {
-            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_heart_outline));
+            likeView.setImageDrawable(ContextCompat.getDrawable(likeView.context, R.drawable.ic_heart_outline));
         }
     }
 
