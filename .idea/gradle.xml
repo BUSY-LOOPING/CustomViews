@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/like_view_library" />
+            <option value="$PROJECT_DIR$/strike_through_view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

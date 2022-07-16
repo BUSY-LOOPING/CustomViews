@@ -24,7 +24,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.ViewDataBinding;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
@@ -176,12 +178,19 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
 
     @BindingAdapter("liked")
     public static void setLiked (LikeView likeView, boolean isLiked) {
-        likeView.isLiked = isLiked;
-        if (isLiked) {
-            likeView.setImageDrawable(ContextCompat.getDrawable(likeView.context, R.drawable.ic_heart_filled));
-        } else {
-            likeView.setImageDrawable(ContextCompat.getDrawable(likeView.context, R.drawable.ic_heart_outline));
+        if (isLiked != likeView.isLiked) {
+            likeView.isLiked = isLiked;
+            if (isLiked) {
+                likeView.setImageDrawable(ContextCompat.getDrawable(likeView.context, R.drawable.ic_heart_filled));
+            } else {
+                likeView.setImageDrawable(ContextCompat.getDrawable(likeView.context, R.drawable.ic_heart_outline));
+            }
         }
+    }
+
+    @InverseBindingAdapter(attribute = "liked")
+    public static boolean getLiked (LikeView likeView) {
+        return likeView.isLiked;
     }
 
     public ViewDataBinding getLikeViewDataBinding() {

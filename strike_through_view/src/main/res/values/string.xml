@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StrikedView">
+        <attr name="strikeUnderBackground" format="reference"/>
+        <attr name="avatarRadius" format="integer"/>
+        <attr name="strikeUnderColor" format="color"/>
+    </declare-styleable>
+</resources>

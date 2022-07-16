@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "Custom Views"
 include ':app'
 include ':like_view_library'
+include ':strike_through_view'
