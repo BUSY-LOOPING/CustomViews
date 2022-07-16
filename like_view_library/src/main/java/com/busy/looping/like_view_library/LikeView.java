@@ -188,7 +188,7 @@ public class LikeView extends androidx.appcompat.widget.AppCompatImageView imple
         }
     }
 
-    @InverseBindingAdapter(attribute = "liked")
+    @InverseBindingAdapter(attribute = "liked", event = "likedAttrChanged")
     public static boolean getLiked (LikeView likeView) {
         return likeView.isLiked;
     }
